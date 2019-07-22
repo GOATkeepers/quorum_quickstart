@@ -2,7 +2,7 @@
 This script will help you install and run 5 nodes of JPMorgan's Quorum blockchain DLT.
 
 1. Make sure you have Docker installed.
-    - test with the command `docker version`
+    - test with the command `docker --version`
     - [Mac install instructions](https://docs.docker.com/docker-for-mac/install/)
     - [Ubuntu install instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
     - [Windows 10 + WSL install instructions](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly)
