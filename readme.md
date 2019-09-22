@@ -18,4 +18,36 @@ This script will help you install and run 5 nodes of JPMorgan's Quorum blockchai
 
 1. Check `docker ps` and you should see six containers. The health check will be available several moments after you run `docker-compose`.
 
+1. Test out geth functionality:  
+  - `docker exec -it quorum_node1_1 geth attach /qdata/dd/geth.ipc`
+  - Within geth console:  
+    `eth.accounts`
+
+
 🎉 Congrats, you now have your own Quorum consortium running on your machine!
+
+### More customizations:
+Change consensus protocol to Clique or other:
+- Add the `QUORUM_CONSENSUS` and optional `QUORUM_GETH_ARGS` environment variables:
+  ```
+  QUORUM_CONSENSUS=clique \
+  QUORUM_GETH_ARGS=" --mine --minerthreads 1--syncmode full" \
+  docker-compose up -d
+  ```
+
+- Debug logs - check for things like blocks are being mined from your `--mine` flag, 
+  or for out-of-memory errors, or a node is waiting on tessera node to startup.
+  - Ubuntu:
+    1. Check containers directory:  
+        - apt installed docker:  
+          `CONTAINER_PATH=/var/lib/docker/containers`
+        - snap installed docker:  
+          `CONTAINER_PATH=/var/snap/docker/common/var-lib-docker/containers`
+    1. `ls -l $CONTAINER_PATH`
+    1. `tail -f $CONTAINER_PATH/<container hash>/<container hash>-json.log`
+  - Mac: (Newer versions of Docker)
+    1. Enter the vm in console tab:  
+      `screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty`
+    1. Within the screen session:  
+      `ls -l /var/lib/docker/containers`
+    1. `tail -f /var/lib/docker/containers/<container hash>/<container hash>-json.log`

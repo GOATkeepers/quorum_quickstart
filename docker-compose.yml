@@ -22,6 +22,11 @@ x-quorum-def:
     start_period: 5s
   labels:
     com.quorum.consensus: ${QUORUM_CONSENSUS:-istanbul}
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "5"
+      max-size: 10m
   entrypoint:
     - /bin/sh
     - -c
@@ -50,6 +55,9 @@ x-quorum-def:
       GENESIS_FILE="/examples/istanbul-genesis.json"
       if [ "${QUORUM_CONSENSUS:-istanbul}" == "raft" ]; then
         GENESIS_FILE="/examples/genesis.json"
+      fi
+      if [ "${QUORUM_CONSENSUS:-istanbul}" == "clique" ]; then
+        GENESIS_FILE="/examples/clique-genesis.json"
       fi
       NETWORK_ID=$$(cat $${GENESIS_FILE} | grep chainId | awk -F " " '{print $$2}' | awk -F "," '{print $$1}')
       GETH_ARGS_raft="--raft --raftport 50400"
@@ -83,6 +91,11 @@ x-tx-manager-def:
     timeout: 3s
     retries: 20
     start_period: 5s
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "5"
+      max-size: 10m
   entrypoint:
     - /bin/sh
     - -c
@@ -194,7 +207,7 @@ services:
     << : *quorum-def
     hostname: node1
     ports:
-      - "22008:8545"
+      - "22000:8545"
     volumes:
       - vol1:/qdata
       - ./examples/quick:/examples:ro
