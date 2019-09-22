@@ -1,5 +1,5 @@
 # Quick Start for Quorum
-This script will help you install and run 5 nodes of JPMorgan's Quorum blockchain DLT.
+This script will help you install and run 3 nodes of JPMorgan's Quorum blockchain DLT.
 
 1. Make sure you have Docker installed.
     - test with the command `docker --version`
