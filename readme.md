@@ -11,10 +11,10 @@ This script will help you install and run 3 nodes of JPMorgan's Quorum blockchai
     -In Docker Desktop Setting, select "Advanced" and slide the Memory slider to 6144 (or higher) OR up to 50% of available memory.
 
 1. Create a new directory for this test and copy this script into it
-    - `mkdir quorum-quickstart && cd quorum-quickstart && git clone git@github.com:rsrdev/quorum-quickstart.git`
+    - `git clone https://github.com/rsrdev/quorum-quickstart.git`
 
 1. Run the Quorum image
-    - `docker-compose up -d`
+    - `docker-compose -f docker-compose-init.yml up -d`
 
 1. Check `docker ps` and you should see six containers. The health check will be available several moments after you run `docker-compose`.
 
@@ -37,6 +37,8 @@ Change consensus protocol to Clique or other:
 
 - Debug logs - check for things like blocks are being mined from your `--mine` flag, 
   or for out-of-memory errors, or a node is waiting on tessera node to startup.
+  - docker-compose log utility:  
+    `docker-compose logs --tail 100 -f node1`
   - Ubuntu:
     1. Check containers directory:  
         - apt installed docker:  
