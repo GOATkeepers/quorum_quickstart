@@ -61,7 +61,7 @@ x-quorum-def:
       fi
       NETWORK_ID=$$(cat $${GENESIS_FILE} | grep chainId | awk -F " " '{print $$2}' | awk -F "," '{print $$1}')
       GETH_ARGS_raft="--raft --raftport 50400"
-      GETH_ARGS_istanbul="--emitcheckpoints --istanbul.blockperiod 1 --mine --minerthreads 1 --syncmode full"
+      GETH_ARGS_istanbul="--emitcheckpoints --mine --minerthreads 1 --syncmode full"
       GETH_ARGS_clique="--mine --minerthreads 1 --syncmode full"
       geth --datadir $${DDIR} init $${GENESIS_FILE}
       geth \
