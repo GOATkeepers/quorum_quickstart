@@ -65,16 +65,18 @@ x-quorum-def:
       GETH_ARGS_clique="--mine --minerthreads 1 --syncmode full"
       geth --datadir $${DDIR} init $${GENESIS_FILE}
       geth \
-        --identity node$${NODE_ID}-clique \
+        --identity node$${NODE_ID}-${QUORUM_CONSENSUS:-istanbul} \
         --datadir $${DDIR} \
         --permissioned \
         --nodiscover \
         --verbosity 5 \
         --networkid $${NETWORK_ID} \
         --rpc \
+        --rpccorsdomain "*" \
+        --rpcvhosts "*" \
         --rpcaddr 0.0.0.0 \
         --rpcport 8545 \
-        --rpcapi admin,db,eth,debug,miner,net,shh,txpool,web3,quorum,clique \
+        --rpcapi admin,db,eth,debug,miner,net,shh,txpool,web3,quorum,${QUORUM_CONSENSUS:-istanbul} \
         --port 21000 \
         --unlock 0 \
         --password /examples/passwords.txt \
